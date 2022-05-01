@@ -10,7 +10,7 @@
 </head>
 <body>
     <div id="test">
-        
+
     </div>
     <!--表單開始-->
     <div class="container">
@@ -29,7 +29,7 @@
                     </div>
                     <div class="modal-body">
                       <div class="add_guy_info">
-                          <form action="">
+                          <form id="form_task">
                             <div class="row mb-2">
                                 <label for="add_info_name_cn" class="col-auto col-form-label">中文名字：</label>
                                 <div class="col-auto">
@@ -54,7 +54,7 @@
                             <div class="row mb-2">
                                 <label for="add_info_phone" class="col-auto col-form-label">人員手機：</label>
                                 <div class="col-auto">
-                                  <input type="text" class="form-control" id="add_info_phone" name="info_phone"  pattern=’\d{4}[-]\d{6}’ required>
+                                  <input type="text" class="form-control" id="add_info_phone" name="info_phone" required>
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -89,7 +89,7 @@
                 <th scope="col">修改</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="taskview">
               <tr>
                 <td data-bs-toggle="tooltip"  title="">陳彥綸</td>
                 <td>Johnny</td>
@@ -124,6 +124,7 @@
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/demo.js"></script>
+    <script src="js/info.js"></script>
     <script>
         var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
         var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
