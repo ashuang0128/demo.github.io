@@ -9,11 +9,11 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div id="test">
-
-    </div>
     <!--表單開始-->
     <div class="container">
+        <div class="alert alert-dark" role="alert">
+            A simple dark alert—check it out!
+          </div>
         <!--新增彈窗開始-->
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <button type="button" class="btn btn-success rounded-pill pill_type_new" data-bs-toggle="modal" data-bs-target="#new_guy">
@@ -29,7 +29,7 @@
                     </div>
                     <div class="modal-body">
                       <div class="add_guy_info">
-                          <form id="form_task">
+                          <form name='form' id="form_task">
                             <div class="row mb-2">
                                 <label for="add_info_name_cn" class="col-auto col-form-label">中文名字：</label>
                                 <div class="col-auto">
@@ -44,11 +44,11 @@
                             </div>
                             <label class="col-auto col-form-label" style="padding-right: 20px;">人員性別：</label>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="info_sex" id="add_info_sex1" value="male" checked>
+                                <input class="form-check-input" type="radio" name="info_sex" id="add_info_sex1" value="男" checked>
                                 <label class="form-check-label" for="add_info_sex1">男</label>
                               </div>
                               <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="info_sex" id="add_info_sex2" value="female">
+                                <input class="form-check-input" type="radio" name="info_sex" id="add_info_sex2" value="女">
                                 <label class="form-check-label" for="add_info_sex2">女</label>
                               </div>
                             <div class="row mb-2">
@@ -89,7 +89,7 @@
                 <th scope="col">修改</th>
             </tr>
             </thead>
-            <tbody id="taskview">
+            <tbody class="taskview">
               <tr>
                 <td data-bs-toggle="tooltip"  title="">陳彥綸</td>
                 <td>Johnny</td>
@@ -98,12 +98,12 @@
                 <td>ashuang0128</td>
                 <td>
                     <button type="button" class="btn btn-success rounded-pill pill_type_new">編輯人員</button>
-                    <button type="button" class="btn btn-danger rounded-pill pill_type_new">刪除人員</button>
+                    <button type="button" class="btn btn-danger rounded-pill pill_type_new" onclick="deletetask()" >刪除人員</button>
                 </td>
               </tr>
             </tbody>
-          </table>
     </div>
+
     
     <!--表單結束-->
 
@@ -126,10 +126,59 @@
     <script src="js/demo.js"></script>
     <script src="js/info.js"></script>
     <script>
+        function deletetask(){
+            const task = document.querySelector(".taskview")
+            task.remove();
+        }
+        function savetask(){
+            const form = document.forms['form'];
+            form.addEventListener("submit",function(e){
+                const name_cn = form.document.info_name_cn.value
+                const name_en = form.document.info_name_en.value
+                const sex = form.document.info_sex.value;
+                switch (sex.value){
+                    case "男":{
+                        const gender = sex.value
+                        break
+                    }
+                    case "女":{
+                        const gender = sex.value
+                        break
+                    }
+                }
+                const phone = form.document.add_info_phone.value
+                const email = form.document.add_info_email.value
+
+                if(form){
+                    let task = `<tr>
+                        <td data-bs-toggle="tooltip" title="">${name_cn}</td>
+                        <td>${name_en}</td>
+                        <td>${gender}</td>
+                        <td>${phone}</td>
+                        <td>${email}</td>
+                        <td>
+                            <button type="button" class="btn btn-success rounded-pill pill_type_new">編輯人員</button>
+                            <button type="button" class="btn btn-danger rounded-pill pill_type_new" onclick="deletetask()">刪除人員</button>
+                        </td>
+                    </tr>`
+                    form.append(task)
+                }else{
+                    var section = document.createElement('tbody');
+                    section.setAttribute('class','taskview');
+                    document.getElementsByTagName('thead').append(section);
+                }
+            })
+        }
+
+    </script>
+    
+    <script>
         var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
         var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
             return new bootstrap.Popover(popoverTriggerEl)
         })
+        var myAlert = document.getElementById('myAlert')
+        var bsAlert = new bootstrap.Alert(myAlert)
     </script>
 </body>
 </html>
